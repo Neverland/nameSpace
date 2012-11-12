@@ -1,0 +1,36 @@
+/*@color*/
+@import "css3.less";
+@gray1:#d2d2d2;
+@gray2:#f2f2f2;
+
+/*@width*/
+@w10:10px;
+@w20:20px;
+@w24:24px;
+@w50:50px;
+@w100:100px;
+@color:100px;
+
+
+.returnWidth(...){
+
+	width: @arguments;
+}
+
+body {
+	.returnWidth((@w10+@w20)*3);
+	background: @gray2;
+	.transition (2s easeIn 500);
+}
+h1 {
+	a{
+		font-size:@w20;
+		line-height: @w24;
+	}
+	span {
+		background: @gray1;
+		color: white;
+	}
+}
+
+div { width: @w50*3 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>nameSpace</title>
+
+</head>
+
+<body>
+<h1>nameSpace</h1>
+<form>
+
+</form>
+<script>
+
+
+		function nameSpace(str,f) {
+			if(/^\d+/gi.test(str)|| typeof(str)!=='string') return false;
+
+			var ns=str.split('.'), i=0,len, o,ni;
+
+			for(len=ns.length;i<len,ni=ns[i];i++){
+
+				try{
+					o = (o?(o[ni]=o[ni]||(i+1==len ?(f?f:{}) : {})): (eval(ni+'='+ni+'||{}')));
+
+					/*
+					＊以字符串a.b为例
+	s				* 1.第一步 o 为undefined 直接进入 eval(ni+'='+ni+'||{}') 分支；
+					* 2.eval（'a'+'='+'a'+'||{}'）；
+					*   eval('a=a||{}'); 第2个a未变量引用未定义，导致报错，进入catch分支；
+					* 3.catch分支 eval('a={}'); 在全局（window）上生成一个a全局变量；
+					* 4.第二步 o 已存在，ni为'b'，进入(o[ni]=o[ni] || (typeof(f) ? f:{}) 分支;
+					*   a.b存在（如果有a.b已经被占用使用旧值，这样不会造成覆盖）；
+					*   a.b不存在，如果f有值则赋值为f，否则赋值为｛｝，以便以后使用ns定义（a.b.c）；
+					* */
+ 				}   catch(e){
+					o = eval(ni + '={}')
+				}
+
+			}
+			typeof(f) && console.log();
+		}
+		nameSpace('a.b.c.d',function(){console.dir(a)});
+		a.b.c.d();
+</script>
+</body>
+</html>

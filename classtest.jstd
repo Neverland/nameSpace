@@ -1,0 +1,3 @@
+load:
+  - script/class.js
+  - classTest.js
